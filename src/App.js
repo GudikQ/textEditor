@@ -4,10 +4,12 @@ import {ControlPanel} from './components/control-panel/ControlPanel';
 import {FileZone} from './components/file-zone/FileZone';
 import {Word} from './components/word/word';
 import getMockText from './text.service';
+import {Test} from "./components/testContrainer/Test";
 
 const App = () => {
     const [words, setWords] = useState([]);
     const [selectedWord, setSelectedWord] = useState('');
+    const [data, setData] = useState({name: "Alex"})
 
     useEffect(() => {
         getMockText().then(result => {
@@ -98,7 +100,8 @@ const App = () => {
                               makeUnderlined={makeUnderlined}
                               word={words[selectedWord]}
                 />
-                <FileZone text={text} addWord={addWord}/>
+                <FileZone addWord={addWord} string="text" />
+                <Test {...data}/>
             </main>
         </div>
     )

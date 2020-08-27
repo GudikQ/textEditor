@@ -14,5 +14,4 @@ export const Word = ({setActiveWord, bold, underlined, itallic, active, word, in
         {word}
       </span>
     )
-
 };
