@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import './index.css'
+import React, { useState } from 'react';
+import './FileZone.css';
 
-export const FileZone = ({ text, addWord, error }) => {
+const FileZone = ({ text, addWord, error }) => {
   const [newText, setNewText] = useState('')
 
   const handleSubmit = e => {
@@ -37,3 +37,6 @@ export const FileZone = ({ text, addWord, error }) => {
     </div>
   )
 };
+
+export default FileZone;
+

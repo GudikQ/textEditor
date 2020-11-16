@@ -1,32 +1,23 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import './App.css'
-import { ControlPanel } from './components/control-panel/ControlPanel'
-import { FileZone } from './components/file-zone/FileZone'
-import { Word } from './components/word/Word'
-import getMockText from './text.service'
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-const App = () => {
-  const [words, setWords] = useState([])
+import { selectWords, selectWordsError } from '../../redux/selectors';
+import { changeWords, getWords } from '../../redux/actions';
+import './Editor.css';
+import ControlPanel from '../Control-panel';
+import FileZone from '../File-zone';
+import Word from '../Word/Word';
+
+const Editor = () => {
+  const dispatch = useDispatch()
+
+  const words = useSelector(selectWords)
+  const error = useSelector(selectWordsError)
+
   const [selectedWord, setSelectedWord] = useState('')
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getMockText()
-        const wordsArray = response.split(' ')
-        const words = wordsArray.map(word => ({
-          word: word,
-          bold: false,
-          underlined: false,
-          itallic: false,
-        }))
-        setWords(words)
-      } catch (error) {
-        setError(error)
-      }
-    }
-    fetchData()
+    dispatch(getWords())
   }, [])
 
   const makeBold = wordId => {
@@ -37,7 +28,7 @@ const App = () => {
       bold: idx === wordId ? !word.bold : word.bold,
     }))
 
-    setWords(formattedWords)
+    dispatch(changeWords(formattedWords))
   }
 
   const makeUnderlined = wordId => {
@@ -48,7 +39,7 @@ const App = () => {
       underlined: idx === wordId ? !word.underlined : word.underlined,
     }))
 
-    setWords(formattedWords)
+    dispatch(changeWords(formattedWords))
   }
 
   const makeItalic = wordId => {
@@ -59,13 +50,14 @@ const App = () => {
       itallic: idx === wordId ? !word.itallic : word.itallic,
     }))
 
-    setWords(formattedWords)
+    dispatch(changeWords(formattedWords))
   }
 
   const addWord = word => {
-    setWords(words => [
-      ...words, { word: word, bold: false, itallic: false, underlined: false }
-      ])
+    const wordList = [
+      ...words, { word: word, bold: false, itallic: false, underlined: false }]
+
+    dispatch(changeWords(wordList))
   }
 
   const replace = (newWord, wordId) => {
@@ -74,7 +66,8 @@ const App = () => {
         ...word,
         word: idx === wordId ? newWord : word.word,
       }))
-      setWords(wordList)
+
+      dispatch(changeWords(wordList))
     }
   }
 
@@ -90,7 +83,7 @@ const App = () => {
   }), [words, selectedWord])
 
   return (
-    <div className="App">
+    <div className="wrapper">
       <header>
         <span>Text Editor</span>
       </header>
@@ -103,10 +96,10 @@ const App = () => {
                       makeUnderlined={makeUnderlined}
                       word={words[selectedWord]}
         />
-        <FileZone text={text} addWord={addWord} error={error}/>
+        <FileZone text={text} addWord={addWord} error={error} />
       </main>
     </div>
   )
 }
 
-export default App;
+export default Editor

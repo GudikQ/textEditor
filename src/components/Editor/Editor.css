@@ -1,3 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
 header {
     display: block;
     height: 40px;
@@ -8,10 +18,10 @@ header {
     text-align: center;
 }
 
-.App {
+.wrapper {
     display: flex;
-    height: 100%;
     flex-direction: column;
+    height: 100vh;
 }
 
 main {

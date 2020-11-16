@@ -1,29 +1,25 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import axios from 'axios'
-import './index.css'
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ControlPanel = ({
+import './ControlPanel.css';
+import { getSynonyms } from '../../redux/actions';
+import { selectSynonyms } from '../../redux/selectors';
+
+const ControlPanel = ({
   selectedWordText,
   selectedWord,
   makeBold,
   makeItalic,
   makeUnderlined,
   word,
-  replace,
+  replace
 }) => {
-  const [synonyms, setSynonyms] = useState([])
+  const dispatch = useDispatch()
+
+  const synonyms = useSelector(selectSynonyms)
 
   useEffect(() => {
-    const findSynonyms = async () => {
-      try {
-        const { data } = await axios('https://api.datamuse.com/words?rel_syn=' + selectedWordText + '')
-        const listOfSynonyms = data.map(value => value.word)
-        setSynonyms(listOfSynonyms)
-      } catch (error) {
-        setSynonyms([])
-      }
-    }
-    findSynonyms()
+    dispatch(getSynonyms(selectedWordText))
   }, [selectedWordText])
 
   const synonymsList = useMemo(() => {
@@ -66,4 +62,6 @@ export const ControlPanel = ({
         </div>}
     </div>
   )
-};
+}
+
+export default ControlPanel

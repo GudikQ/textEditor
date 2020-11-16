@@ -1,7 +1,8 @@
-import React from 'react'
-import './index.css'
+import React from 'react';
 
-export const Word = ({
+import './Word.css';
+
+const Word = ({
   setActiveWord,
   bold,
   underlined,
@@ -24,3 +25,5 @@ export const Word = ({
       </span>
   )
 };
+
+export default Word;
