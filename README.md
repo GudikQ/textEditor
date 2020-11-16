@@ -1,9 +1,28 @@
 # Text-Editor
 
-# Running the application
 
-## Initial Setup
-Run `npm install` in order to setup the application.
+
+## Installation
+
+
+Run npm install in order to setup the application.
+```bash
+yarn install
+```
 
 ## Start the application
-Run `npm start` for a dev server.
+Run npm start for a dev server.
+
+```bash
+npm start
+```
+
+## Technologies
+```
+React
+Functional components
+Hooks
+Redux
+Redux-Saga
+Reselect
+```
