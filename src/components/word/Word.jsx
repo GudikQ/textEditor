@@ -23,4 +23,4 @@ export const Word = ({
         {word}
       </span>
   )
-}
+};

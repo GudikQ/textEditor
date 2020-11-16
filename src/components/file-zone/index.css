@@ -32,7 +32,7 @@
     min-height: 100px;
 }
 
-.btn{
+.btn {
     background-color: #1976d2;
     border: none;
     color: #fff;
@@ -41,7 +41,7 @@
     border-radius: 3px;
 }
 
-.error-message{
+.error-message {
     text-align: center;
     color: red;
 }

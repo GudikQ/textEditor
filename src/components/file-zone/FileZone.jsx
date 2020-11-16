@@ -36,4 +36,4 @@ export const FileZone = ({ text, addWord, error }) => {
       </div>
     </div>
   )
-}
+};
