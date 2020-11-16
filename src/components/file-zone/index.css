@@ -40,3 +40,8 @@
     cursor: pointer;
     border-radius: 3px;
 }
+
+.error-message{
+    text-align: center;
+    color: red;
+}

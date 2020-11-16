@@ -1,5 +1,6 @@
 .word {
     padding-right: 4px;
+    cursor: pointer;
 }
 
 .word.bold {
@@ -12,4 +13,8 @@
 
 .word.underlined {
     text-decoration: underline;
+}
+
+.word.active {
+    color: #1976d2;
 }
